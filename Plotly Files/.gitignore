@@ -3,9 +3,6 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-data job posts.csv
-data job posts
-
 # C extensions
 *.so
 
