@@ -13,9 +13,9 @@ mongo = PyMongo(app)
 def home():
    
     # Find one record of data from the mongo database
-    resume_db = mongo.db.resume.find_one()
+    cos_sim = mongo.db.cos_sim.find_one()
     # Return template and data
-    return render_template("index.html", resume=resume_db)
+    return render_template("index.html", cos=cos_sim)
 
 
 
