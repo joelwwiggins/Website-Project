@@ -1,6 +1,7 @@
 # Dependencies
 from flask import Flask, render_template, redirect
 from flask_pymongo import PyMongo
+from numpy.core.function_base import logspace
 import pandas as pd
 import pymongo
 
@@ -22,9 +23,11 @@ job_resume = a[0]
 def git_top10(name):
     d = job_resume
     df = pd.DataFrame([d[name]]).T
-    df.columns = ["value"]
-    return df.sort_values("value", ascending=False).head(10).to_dict()
+    df.columns = ["Cosine Similarity Score"]
+    df2= df.sort_values("Cosine Similarity Score", ascending=False).head(10)
+    return df2
 
+git_top10("Joel")
 # Route to render index.html template using data from Mongo
 @app.route("/")
 def home():
@@ -34,7 +37,7 @@ def home():
 
     
     # Return template and data
-    return render_template("index.html", options=["Joel", "Mason"])
+    return render_template("index.html", options=["Joel", "Mason", "Anderson", "Jake"])
 
 @app.route("/data/<name1>")
 def get_table(name1):
@@ -44,7 +47,7 @@ def get_table(name1):
 
     
     # Return template and data
-    return render_template("index2.html", options=["Joel", "Mason"], data=git_top10(name1))
+    return render_template("index2.html", options=["Joel", "Mason", "Anderson", "Jake"], data=git_top10(name1).to_html())
 
 
 
